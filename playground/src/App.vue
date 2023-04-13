@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { DefineTemplate, ReuseTemplate, createReusableTemplate } from '../../src'
+import Test from './Test.vue'
 
 const greeting = ref('Hello')
 
@@ -14,8 +15,12 @@ const [DefineBiz, ReuseBiz] = createReusableTemplate<{ msg: string }>()
   <DefineTemplate v-slot="{ data }" name="test">
     <div>Test1: {{ greeting }} {{ data.toString().toUpperCase(0) }}</div>
   </DefineTemplate>
+
   <ReuseTemplate name="test" data="world" />
   <ReuseTemplate name="test" :data="1 + 1" />
+  <Test>
+    <ReuseTemplate name="test" :data="1 + 1" />
+  </Test>
 
   <!-- no name -->
   <DefineTemplate v-slot="{ data }">
